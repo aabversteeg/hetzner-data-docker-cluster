@@ -1,0 +1,37 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: Setup ufw
+    ufw: state=enabled policy=deny
+
+  - name: Allow ssh traffic
+    ufw: rule=allow port=22 proto=tcp
+
+  - name: Allow all traffic between nodes
+    ufw: rule=allow src='{{ hostvars[item]['ip'] }}'
+    with_inventory_hostnames:
+    - all
+
+  - name: Disallow password authentication
+    lineinfile: dest=/etc/ssh/sshd_config
+                regexp="^PasswordAuthentication"
+                line="PasswordAuthentication no"
+                state=present
+
+  - name: Add client alive interval
+    lineinfile: dest=/etc/ssh/sshd_config
+                regexp="^ClientAliveInterval"
+                line="ClientAliveInterval 60"
+                state=present
+    notify: restart ssh
+
+  handlers:
+    - name: restart ssh
+      service: name=ssh state=restarted
+
+- hosts: docker_swarm_manager
+  remote_user: root
+  tasks:
+  - name: Allow web ports access
+    ufw: rule=allow port=80,443 proto=tcp

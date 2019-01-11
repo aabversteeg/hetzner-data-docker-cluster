@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: Set hostname for each node
+    raw: "hostname {{ hostname }}"
+
+  roles:
+    - thomasjpfan.docker-swarm

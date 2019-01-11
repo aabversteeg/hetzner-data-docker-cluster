@@ -1,0 +1,29 @@
+---
+- hosts: all
+  remote_user: root
+  vars:
+    ubuntu_common_required_packages:
+    - ufw
+    - fail2ban
+    - unattended-upgrades
+    - python3
+    ubuntu_common_ssh_port: 22
+
+  tasks:
+
+  - name: Update and upgrade apt packages
+    become: true
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 # one day
+
+  - name: Install required packages
+    apt: state=present pkg={{ item }}
+    with_items: "{{ ubuntu_common_required_packages }}"
+
+  - name: Adjust APT update intervals
+    copy: src=../files/apt_periodic dest=/etc/apt/apt.conf.d/10periodic
+
+  roles:
+    - angstwad.docker_ubuntu

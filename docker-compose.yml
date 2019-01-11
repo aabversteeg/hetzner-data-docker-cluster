@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+    manager:
+        build: .
+        env_file: .env
+        environment:
+            ANSIBLE_HOST_KEY_CHECKING: 'false'
+        volumes:
+            - ~/.ssh/:/root/.ssh
+            - .:/app

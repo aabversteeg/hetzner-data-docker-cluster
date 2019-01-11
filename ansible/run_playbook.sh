@@ -1,0 +1,1 @@
+ansible-playbook playbook.yml -i get_hosts.py "$@"

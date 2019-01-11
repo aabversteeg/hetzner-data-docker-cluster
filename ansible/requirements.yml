@@ -1,0 +1,5 @@
+- src: angstwad.docker_ubuntu
+  version: v3.8.0
+
+- src: thomasjpfan.docker-swarm
+  version: 1.0.5

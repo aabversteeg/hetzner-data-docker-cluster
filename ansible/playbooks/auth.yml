@@ -1,0 +1,19 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: Place SSH private key
+    copy:
+      src: /app/ssh/id_rsa
+      dest: /root/.ssh/id_rsa
+      owner: root
+      group: root
+      mode: 0600
+
+  - name: Place SSH public key
+    copy:
+      src: /app/ssh/id_rsa.pub
+      dest: /root/.ssh/id_rsa.pub
+      owner: root
+      group: root
+      mode: 0644

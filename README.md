@@ -1,7 +1,7 @@
 # Docker swarm cluster manager
-Use this project to easily set up a Docker Swarm cluster on the Hetzner cloud.
+Use this project to easily and quickly set up a Docker Swarm cluster on the Hetzner cloud. Taking the cluster down can be done just as easy. This approach provides a good basis for applications that need computing power only temporary.
 
-##Prerequisites:
+## Prerequisites:
  - Verified Hetzner account
  - One or more virtual machines up and running. Must be placed in a single project.
 
@@ -21,3 +21,6 @@ SSH to node by index.
 
 `container_exec.sh`
 Start a shell in the manager's container.
+
+## Todo:
+ - Extend this project with other software, such as (py)Spark

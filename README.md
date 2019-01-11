@@ -3,10 +3,10 @@ Use this project to easily set up a Docker Swarm cluster on the Hetzner cloud.
 
 ##Prerequisites:
  - Verified Hetzner account
- - 
+ - One or more virtual machines up and running. Must be placed in a single project.
 
 ## Setup
-Create the .env file and add your API token:
+Create the .env file and add your Hetzner API token:
 HCLOUD_TOKEN=...
 
 ## Commands
